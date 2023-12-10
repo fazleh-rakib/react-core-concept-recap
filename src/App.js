@@ -1,10 +1,11 @@
 
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   return (
     <div className="App">
+      <LoadPosts />
     <District name='Singapore' special ='girls'/>
     <District name='Puran Dhaka' special ='katchi'/>
     <District name='Uttara' special ='Momo'/>
@@ -12,6 +13,40 @@ function App() {
     </div>
   );
 }
+
+function LoadPosts (){
+  const [posts , setPosts] = useState([])
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(data => setPosts(data))
+  }, [])
+  return(
+    <div>
+      <h2>All Posts{posts.length}</h2>
+      {
+        posts.map(post => <Post post ={post}
+          key ={post.id} />)
+      }
+      {
+        posts.map(post => console.log(post))
+      }
+    </div>
+  )
+}
+
+function Post (props){
+  
+  const {title ,body,userId} = props.post
+  return(
+    <div style={districtStyle}>
+      <h1>User Id: {userId}</h1>
+      <h2>Post Title : {title}</h2>
+      <p>Body : {body}</p>
+    </div>
+  )
+}
+
 const districtStyle ={
   backgroundColor: 'khaki',
   border: '2px solid brown',
