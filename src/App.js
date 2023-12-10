@@ -1,10 +1,12 @@
 
 import './App.css';
 import { useEffect, useState } from 'react';
+import Comments from './components/Comments/Comments';
 
 function App() {
   return (
     <div className="App">
+      <Comments />
       <LoadPosts />
     <District name='Singapore' special ='girls'/>
     <District name='Puran Dhaka' special ='katchi'/>
@@ -29,7 +31,7 @@ function LoadPosts (){
           key ={post.id} />)
       }
       {
-        posts.map(post => console.log(post))
+        // posts.map(post => console.log(post))
       }
     </div>
   )
